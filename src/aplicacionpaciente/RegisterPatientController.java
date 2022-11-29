@@ -104,7 +104,7 @@ public class RegisterPatientController {
         }else{
              try{
                 showAlert2(Alert.AlertType.INFORMATION, owner,"Your Username and Password are",usernamePass);
-                URL url = new File("src/doctorapp/menuDoctor.fxml").toURI().toURL();
+                URL url = new File("src/aplicacionpaciente/menuPatient.fxml").toURI().toURL();
                 Parent root = FXMLLoader.load(url);    
                 Scene scene = new Scene(root);
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
