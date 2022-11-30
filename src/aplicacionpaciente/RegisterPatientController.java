@@ -22,6 +22,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -35,8 +36,11 @@ public class RegisterPatientController {
      @FXML
     private TextField txtname;
 
+   @FXML
+    private RadioButton RBMale;
+
     @FXML
-    private ChoiceBox<String> genderChoiceBox;
+    private RadioButton RBFemale;
 
     @FXML
     private Button registerPatientButton;
@@ -84,16 +88,21 @@ public class RegisterPatientController {
     @FXML
     void registerPatient(ActionEvent event) throws Exception {
         Window owner = registerPatientButton.getScene().getWindow();
-        ObservableList<String> genderList = FXCollections.observableArrayList("Male", "Female");
-        genderChoiceBox.setItems(genderList);
-        genderChoiceBox.setValue("Male");
+        
         
         String name = txtname.getText();
         String surname = txtsurname.getText();
         String email = txtemail.getText();
         String address = txtaddress.getText();
         String diagnosis = txtdiagnosis.getText();
-        String gender = genderChoiceBox.getValue();
+        String gender = "";
+        if(RBMale.isSelected()){
+           gender = "Male";
+        }
+
+        if(RBFemale.isSelected()){
+           gender = "Female";
+        }
         Date dob = new Date(txtdob.getText());
         Integer medCard = Integer.parseInt(txtmedCardNumber.getText());
         String allergies = txtallergies.getText();
