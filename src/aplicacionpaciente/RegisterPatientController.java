@@ -6,8 +6,10 @@
 package aplicacionpaciente;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -77,6 +79,9 @@ public class RegisterPatientController {
     
     @FXML
     private Button DoctorList;
+    
+     @FXML
+    private TextField doctorIdtxt;
 
 
     @FXML
@@ -99,6 +104,8 @@ public class RegisterPatientController {
         //Patient p = new Patient(name, surname, medical_card_number, dob, address, email, diagnosis, allergies, gender, userId, macAddress);
         String usernamePass = Menu.registerPatient( medCard,name, surname, dob, address, email, diagnosis, allergies, gender, macAddress);
         
+        int doctorId = Integer.parseInt(doctorIdtxt.getText());
+        Menu.sendDoctorId(doctorId);
         if(usernamePass==null){
              infoMessage("Please enter the data correctly", null, "Failed");
         }else{
@@ -135,7 +142,7 @@ public class RegisterPatientController {
        alert.setContentText(message);
        alert.initOwner(owner);
        alert.show();
-       }
+    }
      
      public static void infoMessage(String infoMessage, String headerText, String title) {
        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -143,6 +150,23 @@ public class RegisterPatientController {
            alert.setTitle(title);
            alert.setHeaderText(headerText);
            alert.showAndWait();
+       }
+     
+     @FXML
+    void DoctorList(ActionEvent event) throws IOException {
+         Window owner = DoctorList.getScene().getWindow();
+       List <String> Doctors = Menu.showDoctors();
+       showAlert(Alert.AlertType.INFORMATION,owner,"Doctors",Doctors.toString());
+        
+    }
+     
+      public static void showAlert(Alert.AlertType alertType, Window owner, String title, String message ) {
+       Alert alert = new Alert(alertType);
+       alert.setTitle(title);
+       alert.setHeaderText(null);
+       alert.setContentText(message);
+       alert.initOwner(owner);
+       alert.show();
        }
     
 }

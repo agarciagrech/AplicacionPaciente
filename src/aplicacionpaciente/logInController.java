@@ -73,12 +73,12 @@ public class logInController {
         }
         
         
-         
+        
         String username = Username.getText();
         String password = Password.getText();
-      
+        System.out.println("Empezando login");
         Boolean logInCheck = Menu.login(username, password);
-        
+        System.out.println("Ya he hecho la funcion de login, menu");
         if(!logInCheck){
             infoMessage("Please enter correct username or password", null, "Failed");
         }else{

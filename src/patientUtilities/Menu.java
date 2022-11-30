@@ -36,6 +36,7 @@ public class Menu {
     public static OutputStream outputStream;
     public static PrintWriter pw;
     public static BufferedReader br;
+    public static Patient patient;
     
   
     public static void main(String[] args) throws Exception {
@@ -148,12 +149,16 @@ public class Menu {
     }
                   
     public static boolean login(String username, String password) throws Exception{
+        System.out.println("Prepw");
         pw.println(2);
+        System.out.println("post pw");
         boolean logInCorrect = false;
+        System.out.println("preuser");
         User user = new User();
         user.setPassword(password);
         user.setUsername(username);
-        String line2 = br.readLine();
+        System.out.println("postuser");
+        System.out.println("Dentro de la funcion menu");
         patientUtilities.CommunicationWithServer.sendUser(pw, user);
         String line = br.readLine();
         if(line.equals("Wrong username or password")) {
@@ -161,12 +166,14 @@ public class Menu {
         } else if(line.equals("patient")){
                 //patientMenu(socket, inputStream, outputStream, br, pw, user.getUserId());
                 logInCorrect = true;
-                Patient patient = patientUtilities.CommunicationWithServer.receivePatient(br);
+                patient = patientUtilities.CommunicationWithServer.receivePatient(br);
+                
         } else if (line.equals("doctor")){
                 logInCorrect = true;
-                Patient patient  = patientUtilities.CommunicationWithServer.receivePatient(br);
+                patient  = patientUtilities.CommunicationWithServer.receivePatient(br);
                 //doctorMenu(socket, inputStream, outputStream, br, pw);              
         }
+        System.out.println("Fin de funcion menu");
         return logInCorrect;
     }
     
@@ -214,7 +221,7 @@ public class Menu {
                     break;
                 case 4:
                     System.out.println("Change BITalino MAC address");
-                    updateMacAddress(pw, patient);
+                    //updateMacAddress(pw, patient);
                     break;
                 default:
                     System.out.println("Not a valid option.");
@@ -555,12 +562,18 @@ public class Menu {
         }
     }
     
-    private static void updateMacAddress (PrintWriter pw, Patient p) throws Exception{
-       Scanner sc = new Scanner (System.in);
-        String update;
-        System.out.println("Write Bitalino MacAddress:");
-        update = sc.next();
-        p.setMacAddress(update);
-        patientUtilities.CommunicationWithServer.sendPatient(pw, p);
+    public static void updateMacAddress (String macAddress) throws Exception{
+        pw.println(4);
+        patient.setMacAddress(macAddress);
+        patientUtilities.CommunicationWithServer.sendPatient(pw, patient);
+    }
+    
+    public static List<String> showSignalList(){
+        int medcard = patient.getMedical_card_number();
+        pw.println(medcard);
+        pw.println(3);
+        List<String> sList = patientUtilities.CommunicationWithServer.ShowSignals(br, pw);
+        
+        return sList;
     }
 }

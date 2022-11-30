@@ -65,12 +65,32 @@ public class MenuPatientController {
 
     @FXML
     void ShowSignal(ActionEvent event) {
-
+        try{
+            URL url = new File("src/aplicacionpaciente/showSignals.fxml").toURI().toURL();
+            Parent root = FXMLLoader.load(url);    
+            Scene scene = new Scene(root);
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            System.out.println("Se creo record");
+            stage.setScene(scene);
+            stage.show();
+        }catch(Exception e){
+                e.printStackTrace();
+        }
     }
 
     @FXML
     void Update(ActionEvent event) {
-
+        try{
+            URL url = new File("src/aplicacionpaciente/updatePatient.fxml").toURI().toURL();
+            Parent root = FXMLLoader.load(url);    
+            Scene scene = new Scene(root);
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            System.out.println("Se creo record");
+            stage.setScene(scene);
+            stage.show();
+        }catch(Exception e){
+                e.printStackTrace();
+        }
     }
 
     
