@@ -74,6 +74,10 @@ public class RegisterPatientController {
 
     @FXML
     private Button exitButton;
+    
+    @FXML
+    private Button DoctorList;
+
 
     @FXML
     void registerPatient(ActionEvent event) throws Exception {
@@ -99,8 +103,10 @@ public class RegisterPatientController {
              infoMessage("Please enter the data correctly", null, "Failed");
         }else{
              try{
+               
                 showAlert2(Alert.AlertType.INFORMATION, owner,"Your Username and Password are",usernamePass);
-                URL url = new File("src/aplicacionpaciente/menuPatient.fxml").toURI().toURL();
+                Menu.backTologin();
+                URL url = new File("src/aplicacionpaciente/logIn.fxml").toURI().toURL();
                 Parent root = FXMLLoader.load(url);    
                 Scene scene = new Scene(root);
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();

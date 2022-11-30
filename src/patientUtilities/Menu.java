@@ -101,7 +101,7 @@ public class Menu {
     }
        
     public static String registerPatient (Integer medical_card_number, String name, String surname, java.util.Date dob, String address, String email, String diagnosis, String allergies, String gender, String macAddress) throws Exception {
-        
+        pw.println(1);
         boolean registerCorrect = false;
         Patient p = new Patient();
         p.setName(name); 
@@ -131,7 +131,21 @@ public class Menu {
             return null;
         }
     }
-
+    public static List<String> showDoctors() throws IOException{
+        List<String> doctors = new ArrayList();
+        int size = Integer.parseInt(br.readLine());
+        for (int i=0;i<size;i++){
+            doctors.add(i,br.readLine());
+        }
+        return doctors;
+    }
+    public static void sendDoctorId(int doctorid){
+        pw.println(doctorid);
+    }
+    public static void backTologin(){
+        pw.println(2);
+        System.out.println("I'm in back to login");
+    }
                   
     public static boolean login(String username, String password) throws Exception{
         pw.println(2);
@@ -139,6 +153,7 @@ public class Menu {
         User user = new User();
         user.setPassword(password);
         user.setUsername(username);
+        String line2 = br.readLine();
         patientUtilities.CommunicationWithServer.sendUser(pw, user);
         String line = br.readLine();
         if(line.equals("Wrong username or password")) {
