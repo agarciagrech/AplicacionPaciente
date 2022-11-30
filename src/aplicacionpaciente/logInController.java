@@ -50,6 +50,7 @@ public class logInController {
     
      @FXML
     void register(ActionEvent event) throws IOException {
+         Menu.goToregister();
          URL url = new File("src/aplicacionpaciente/registerPatient.fxml").toURI().toURL();
          Parent root = FXMLLoader.load(url);    
          Scene scene = new Scene(root);
@@ -83,7 +84,7 @@ public class logInController {
         }else{
             try{
                 
-                URL url = new File("src/doctorapp/menuDoctor.fxml").toURI().toURL();
+                URL url = new File("src/aplicacionpaciente/menuPatient.fxml").toURI().toURL();
                 Parent root = FXMLLoader.load(url);    
                 Scene scene = new Scene(root);
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();

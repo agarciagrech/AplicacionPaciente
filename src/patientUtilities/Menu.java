@@ -100,8 +100,8 @@ public class Menu {
         pw.println(1);
     }
        
-    public static String registerPatient (String name, String surname, Integer medical_card_number, java.util.Date dob, String address, String email, String diagnosis, String allergies, String gender, Integer userId, String macAddress) throws Exception {
-        pw.println(1);
+    public static String registerPatient (Integer medical_card_number, String name, String surname, java.util.Date dob, String address, String email, String diagnosis, String allergies, String gender, String macAddress) throws Exception {
+        
         boolean registerCorrect = false;
         Patient p = new Patient();
         p.setName(name); 
@@ -113,7 +113,6 @@ public class Menu {
         p.setDiagnosis(diagnosis);
         p.setAllergies(allergies);
         p.setGender(gender);
-        p.setUserId(userId);
         p.setMacAddress(macAddress);
         
         
@@ -124,7 +123,7 @@ public class Menu {
         String userpass= "Username: " + userName +"\n Password: " + userPassword;
         
         String line = br.readLine();
-        if (line.equals("Doctor successfully registered")){
+        if (line.equals("Patient successfully registered")){
             registerCorrect = true;
             return userpass;
         } else{

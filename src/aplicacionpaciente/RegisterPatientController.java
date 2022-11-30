@@ -61,9 +61,6 @@ public class RegisterPatientController {
     private TextField txtemail;
     
     @FXML
-    private TextField txtId;
-
-    @FXML
     private TextField txtmacAddress;
 
     @FXML
@@ -87,7 +84,6 @@ public class RegisterPatientController {
         
         String name = txtname.getText();
         String surname = txtsurname.getText();
-        Integer patientId = Integer.parseInt(txtId.getText());
         String email = txtemail.getText();
         String address = txtaddress.getText();
         String diagnosis = txtdiagnosis.getText();
@@ -97,7 +93,7 @@ public class RegisterPatientController {
         String allergies = txtallergies.getText();
         String macAddress = txtmacAddress.getText();
         //Patient p = new Patient(name, surname, medical_card_number, dob, address, email, diagnosis, allergies, gender, userId, macAddress);
-        String usernamePass = Menu.registerPatient(name, surname, medCard, dob, address, email, diagnosis, allergies, gender, medCard, macAddress);
+        String usernamePass = Menu.registerPatient( medCard,name, surname, dob, address, email, diagnosis, allergies, gender, macAddress);
         
         if(usernamePass==null){
              infoMessage("Please enter the data correctly", null, "Failed");
