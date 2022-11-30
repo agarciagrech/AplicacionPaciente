@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import patientUtilities.Menu;
 import static patientUtilities.Menu.br;
 import static patientUtilities.Menu.pw;
 import pojos.Patient;
@@ -31,8 +32,7 @@ public class RecordSignalController {
     @FXML
     void record(ActionEvent event) {
         System.out.println("aca dentro del record");
-        Patient patient = patientUtilities.CommunicationWithServer.receivePatient(br);
-        patientUtilities.CommunicationWithServer.recordSignal(patient, pw);
+        Menu.recordSignal();
         System.out.println("La señal se ha grabado");
     }
     

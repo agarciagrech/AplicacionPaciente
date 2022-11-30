@@ -136,7 +136,7 @@ public class Menu {
         List<String> doctors = new ArrayList();
         int size = Integer.parseInt(br.readLine());
         for (int i=0;i<size;i++){
-            doctors.add(i,br.readLine());
+            doctors.add(i,br.readLine()+"\n");
         }
         return doctors;
     }
@@ -575,5 +575,10 @@ public class Menu {
         List<String> sList = patientUtilities.CommunicationWithServer.ShowSignals(br, pw);
         
         return sList;
+    }
+    
+    public static void recordSignal(){
+        pw.println(1);
+        patientUtilities.CommunicationWithServer.recordSignal(patient, pw);
     }
 }

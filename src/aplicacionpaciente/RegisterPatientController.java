@@ -76,12 +76,9 @@ public class RegisterPatientController {
 
     @FXML
     private Button exitButton;
+   
     
-    @FXML
-    private Button DoctorList;
     
-     @FXML
-    private TextField doctorIdtxt;
 
 
     @FXML
@@ -104,16 +101,14 @@ public class RegisterPatientController {
         //Patient p = new Patient(name, surname, medical_card_number, dob, address, email, diagnosis, allergies, gender, userId, macAddress);
         String usernamePass = Menu.registerPatient( medCard,name, surname, dob, address, email, diagnosis, allergies, gender, macAddress);
         
-        int doctorId = Integer.parseInt(doctorIdtxt.getText());
-        Menu.sendDoctorId(doctorId);
+       
         if(usernamePass==null){
              infoMessage("Please enter the data correctly", null, "Failed");
         }else{
-             try{
-               
-                showAlert2(Alert.AlertType.INFORMATION, owner,"Your Username and Password are",usernamePass);
-                Menu.backTologin();
-                URL url = new File("src/aplicacionpaciente/logIn.fxml").toURI().toURL();
+             showAlert2(Alert.AlertType.INFORMATION, owner,"Your Username and Password are",usernamePass);
+              try{
+                
+                URL url = new File("src/aplicacionpaciente/selectDoctor.fxml").toURI().toURL();
                 Parent root = FXMLLoader.load(url);    
                 Scene scene = new Scene(root);
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -152,13 +147,7 @@ public class RegisterPatientController {
            alert.showAndWait();
        }
      
-     @FXML
-    void DoctorList(ActionEvent event) throws IOException {
-         Window owner = DoctorList.getScene().getWindow();
-       List <String> Doctors = Menu.showDoctors();
-       showAlert(Alert.AlertType.INFORMATION,owner,"Doctors",Doctors.toString());
-        
-    }
+    
      
       public static void showAlert(Alert.AlertType alertType, Window owner, String title, String message ) {
        Alert alert = new Alert(alertType);
