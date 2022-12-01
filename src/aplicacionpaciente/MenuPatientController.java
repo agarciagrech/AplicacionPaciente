@@ -68,10 +68,16 @@ public class MenuPatientController {
     }
 
     @FXML
-    void ShowSignal(ActionEvent event) {
-        Window owner = ShowSignalButton.getScene().getWindow();
+    void ShowSignal(ActionEvent event) throws MalformedURLException, IOException {
+        /*Window owner = ShowSignalButton.getScene().getWindow();
         List <String> sList = Menu.showSignalList();
-        showSignals(Alert.AlertType.INFORMATION, owner, "Signals of patient",sList.toString());
+        showSignals(Alert.AlertType.INFORMATION, owner, "Signals of patient",sList.toString());*/
+        URL url = new File("src/aplicacionpaciente/showSignal.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);    
+        Scene scene = new Scene(root);
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
         
     }
 
