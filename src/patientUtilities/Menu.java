@@ -39,52 +39,8 @@ public class Menu {
     public static Patient patient;
     
   
-    public static void main(String[] args) throws Exception {
-       /* try {
-            Socket socket = utilities.CommunicationWithServer.connectToServer();
-            InputStream inputStream = socket.getInputStream();
-            OutputStream outputStream = socket.getOutputStream();
-            PrintWriter printWriter = new PrintWriter (outputStream,true);
-            BufferedReader bf = new BufferedReader (new InputStreamReader (inputStream));
-            Scanner sc = new Scanner (System.in);
-            
-            String trashcan;
-            int choice=1;
-	
-            do {
-                try {
-                    System.out.println("Welcome to Telesomnia.");
-                    System.out.println("1. Register");
-                    System.out.println("2. Login");
-                    System.out.println("0. Exit");
-                    choice = sc.nextInt();
-                    System.out.println(choice);
-                    printWriter.println(choice);
-                    System.out.println("after pw");
-                    switch(choice) {
-                        case 0:
-                            utilities.CommunicationWithServer.ReleaseResources(printWriter, bf);
-                            utilities.CommunicationWithServer.exitFromServer(inputStream, outputStream, socket);
-                        case 1:
-                            System.out.println("inside switch 1");
-                            register(bf, printWriter);
-                            break;
-                        case 2:
-                            System.out.println("inside switch 2");
-                            login(socket, inputStream, outputStream, bf, printWriter);
-                            break;
-                        default:
-                            System.out.println("Please introduce a valid option.");
-                    }
-                } catch (Exception e) {
-                        trashcan = sc.next();
-                        System.out.println("Please introduce a valid option.");
-                }
-            }while(true);
-        } catch (IOException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-    }
+    
+       
     
     public static void initiliazeStreams(String IPAddress) throws IOException {
             socket = patientUtilities.CommunicationWithServer.connectToServer(IPAddress);
@@ -165,6 +121,7 @@ public class Menu {
         String line = br.readLine();
         if(line.equals("Wrong username or password")) {
             logInCorrect = false;
+             pw.println(2);
         } else if(line.equals("patient")){
                 //patientMenu(socket, inputStream, outputStream, br, pw, user.getUserId());
                 logInCorrect = true;
