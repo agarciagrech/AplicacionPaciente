@@ -16,6 +16,7 @@ import javax.bluetooth.RemoteDevice;
 import pojos.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import patientUtilities.Menu;
 
 /**
  *
@@ -33,6 +34,36 @@ public class CommunicationWithServer {
         BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
 
         return socket;
+         /*boolean connected = false;
+        Socket socket = null; 
+        do {
+            socket = new Socket();
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            
+            try {
+                System.out.println(connected);
+                socket = new Socket(ip, 9000);
+
+                InputStream inputStream = socket.getInputStream();
+                OutputStream outputStream = socket.getOutputStream();
+                PrintWriter printWriter = new PrintWriter(outputStream, true);
+                BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
+                
+                connected = socket.isConnected();  
+                //Menu.correctConnecttion(connected);
+                System.out.println(connected);
+            } catch (IOException ex) {
+                System.out.println("Dentro del catch");
+                
+                if (connected == false) {
+                    System.out.println("Connection failed");
+                }
+                
+            }
+            //connected = true;
+        } while (!connected);
+
+        return socket;*/
     }
 
     public static void sendDoctor(PrintWriter pw, Doctor doctor) {
