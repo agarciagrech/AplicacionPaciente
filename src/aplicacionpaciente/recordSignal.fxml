@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="aplicacionpaciente.RecordSignalController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacionpaciente.RecordSignalController">
    <children>
       <Label layoutX="109.0" layoutY="85.0" prefHeight="18.0" prefWidth="51.0" text="RECORD" />
       <Button fx:id="recordButton" layoutX="248.0" layoutY="138.0" mnemonicParsing="false" onAction="#record">
@@ -14,5 +13,7 @@
             <Circle fill="DODGERBLUE" radius="24.0" stroke="BLACK" strokeType="INSIDE" />
          </graphic>
       </Button>
+      <Button fx:id="exitButton" layoutX="550.0" layoutY="14.0" mnemonicParsing="false" onAction="#exit" text="Exit" />
+      <Button fx:id="backButton" layoutX="7.0" layoutY="1.0" mnemonicParsing="false" onAction="#back" text="Back" />
    </children>
 </AnchorPane>

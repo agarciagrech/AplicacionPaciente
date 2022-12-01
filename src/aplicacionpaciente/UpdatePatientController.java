@@ -5,6 +5,7 @@
 package aplicacionpaciente;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -34,7 +35,27 @@ public class UpdatePatientController {
 
     @FXML
     private Button UpdateButton;
-
+    @FXML
+    private Button exitButton;
+    
+    @FXML
+    private Button BackButton;
+    
+    @FXML
+    void exit (ActionEvent event) {
+        Menu.exit();
+    }
+    @FXML
+    void Back(ActionEvent event) throws IOException {
+        URL url = new File("src/aplicacionpaciente/menuPatient.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        System.out.println("Se creo record");
+        stage.setScene(scene);
+        stage.show();
+    }
+    
     @FXML
     void Update(ActionEvent event) throws Exception {
         String macAddress = MacAddressLabel.getText();

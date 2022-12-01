@@ -137,6 +137,7 @@ public class RegisterPatientController {
     
     @FXML
     void exitApp(ActionEvent event) {
+        
 
     }
      public static void showAlert2(Alert.AlertType alertType, Window owner, String title, String message ) {

@@ -28,12 +28,28 @@ public class RecordSignalController {
     
     @FXML
     private Button recordButton;
+    @FXML
+    private Button backButton;
+
+    @FXML
+    private Button exitButton;
 
     @FXML
     void record(ActionEvent event) {
         System.out.println("aca dentro del record");
         Menu.recordSignal();
         System.out.println("La señal se ha grabado");
+    }
+    
+    
+    @FXML
+    void back(ActionEvent event) {
+
+    }
+
+    @FXML
+    void exit(ActionEvent event) {
+        Menu.exit();
     }
     
     
