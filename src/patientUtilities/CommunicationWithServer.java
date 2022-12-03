@@ -194,7 +194,7 @@ public class CommunicationWithServer {
         return d;
     }
 
-    public static Signal receiveSignal(BufferedReader br) {
+    public static Signal receiveECGSignal(BufferedReader br) {
         Signal s = new Signal();
         try {
             String line = br.readLine();
@@ -222,8 +222,46 @@ public class CommunicationWithServer {
                             s.setECG_values(ECG);
                             break;
 
+                        
+                        case "startDate":
+                        try {
+                            s.setStartDate(format.parse(data2[j + 1]));
+                        } catch (ParseException ex) {
+                            Logger.getLogger(CommunicationWithServer.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        break;
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(CommunicationWithServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("hola Recieve Signal");
+        System.out.println(s.toString());
+        return s;
+    }
+    
+     public static Signal receiveEMGSignal(BufferedReader br) {
+        Signal s = new Signal();
+        try {
+            String line = br.readLine();
+            //System.out.println(line);
+            line = line.replace("{", "");
+            line = line.replace("Signal", "");
+            String[] atribute = line.split(",");
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+            for (int i = 0; i < atribute.length; i++) {
+                String[] data2 = atribute[i].split("=");
+                for (int j = 0; j < data2.length - 1; j++) {
+                    data2[j] = data2[j].replaceAll(" ", "").replaceAll("\\[", "").replaceAll("\\]", "");
+                    switch (data2[j]) {
+                        case "signalId":
+                            s.setSignalId(Integer.parseInt(data2[j + 1]));
+                            break;
+                        
                         case "EMG_values":
-                            separatedString = data2[j + 1].split(",");
+                            String[] separatedString = data2[j + 1].split(",");
                             List<Integer> EMG = new ArrayList();
                             for (int k = 0; k < separatedString.length; k++) {
                                 EMG.add(k, Integer.parseInt(separatedString[k]));
@@ -261,7 +299,7 @@ public class CommunicationWithServer {
             for (int i = 0; i < atribute.length; i++) {
                 String[] data2 = atribute[i].split("=");
                 for (int j = 0; j < data2.length - 1; j++) {
-                    data2[j] = data2[j].replace(" ", "");
+                    data2[j] = data2[j].replaceAll(" ", "").replaceAll("\\[", "").replaceAll("\\]", "");
                     switch (data2[j]) {
                         case "username":
                             u.setUsername(data2[j + 1]);
