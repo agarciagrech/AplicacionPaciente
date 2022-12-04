@@ -7,6 +7,7 @@ package aplicacionpaciente;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
@@ -131,13 +132,20 @@ public class RegisterPatientController {
     }
 
     @FXML
-    void backtoMenu(ActionEvent event) {
+    void backtoMenu(ActionEvent event) throws MalformedURLException, IOException {
+          Menu.backToMenu();
+        URL url = new File("src/aplicacionpaciente/menuPatient.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);    
+        Scene scene = new Scene(root);
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
+        stage.setScene(scene);
+        stage.show();
     }
     
     @FXML
     void exitApp(ActionEvent event) {
-        
+        Menu.exit();
 
     }
      public static void showAlert2(Alert.AlertType alertType, Window owner, String title, String message ) {

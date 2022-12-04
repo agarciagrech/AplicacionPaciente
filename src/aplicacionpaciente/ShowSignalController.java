@@ -61,7 +61,7 @@ public class ShowSignalController {
     @FXML
     void back(ActionEvent event) throws IOException {
         Menu.backToMenu();
-        URL url = new File("src/aplicacionpaciente/menuPatientr.fxml").toURI().toURL();
+        URL url = new File("src/aplicacionpaciente/menuPatient.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);    
         Scene scene = new Scene(root);
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
