@@ -34,49 +34,16 @@ public class CommunicationWithServer {
         BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
 
         return socket;
-         /*boolean connected = false;
-        Socket socket = null; 
-        do {
-            socket = new Socket();
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            
-            try {
-                System.out.println(connected);
-                socket = new Socket(ip, 9000);
-
-                InputStream inputStream = socket.getInputStream();
-                OutputStream outputStream = socket.getOutputStream();
-                PrintWriter printWriter = new PrintWriter(outputStream, true);
-                BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
-                
-                connected = socket.isConnected();  
-                //Menu.correctConnecttion(connected);
-                System.out.println(connected);
-            } catch (IOException ex) {
-                System.out.println("Dentro del catch");
-                
-                if (connected == false) {
-                    System.out.println("Connection failed");
-                }
-                
-            }
-            //connected = true;
-        } while (!connected);
-
-        return socket;*/
+        
     }
 
     public static void sendDoctor(PrintWriter pw, Doctor doctor) {
         pw.println(doctor.toString());
-        System.out.println("doctor sended");
     }
 
     public static void sendPatient(PrintWriter pw, Patient patient) {
-        System.out.println("in send patient");
-        System.out.println(patient.toString()); //SE MANDA BIEN
         pw.println(patient.toString());
-
-    }
+}
 
     public static void sendSignal(PrintWriter printWriter, Signal signal) {
         printWriter.println(signal.toString());
@@ -112,8 +79,6 @@ public class CommunicationWithServer {
                             p.setSurname(data2[j + 1]);
                             break;
                         case "dob":
-                            //Date dob = java.sql.Date.valueOf(data2[j+1]);
-                            //p.setDob(dob);
                             try {
                             p.setDob(format.parse(data2[j + 1]));
                         } catch (ParseException ex) {
@@ -146,8 +111,7 @@ public class CommunicationWithServer {
                     }
                 }
             }
-            System.out.println("Patient received:");
-            System.out.println(p.toString());
+            
             return p;
         } catch (IOException ex) {
             return null;
@@ -186,103 +150,63 @@ public class CommunicationWithServer {
                     }
                 }
             }
-            System.out.println("Doctor recieved:");
-            System.out.println(d.toString());
+            
         } catch (IOException ex) {
             Logger.getLogger(CommunicationWithServer.class.getName()).log(Level.SEVERE, null, ex);
         }
         return d;
     }
 
-    public static Signal receiveECGSignal(BufferedReader br) {
+    public static Signal receiveECGSignal(BufferedReader br) throws IOException {
         Signal s = new Signal();
-        try {
-            String line = br.readLine();
-            //System.out.println(line);
+        String line = br.readLine();
             line = line.replace("{", "");
             line = line.replace("Signal", "");
-            String[] atribute = line.split(",");
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
+            String[] atribute = line.split("/");
             for (int i = 0; i < atribute.length; i++) {
                 String[] data2 = atribute[i].split("=");
                 for (int j = 0; j < data2.length - 1; j++) {
                     data2[j] = data2[j].replace(" ", "");
-                    switch (data2[j]) {
-                        case "signalId":
-                            s.setSignalId(Integer.parseInt(data2[j + 1]));
-                            break;
-                        case "ECG_values":
-                            //no estoy segura de si están separados por una coma o un espacio
-                            String[] separatedString = data2[j + 1].split(",");
+                    if(data2[j].equalsIgnoreCase("ECG_values")) {
+                            data2[j+1]=data2[j+1].replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "");
+                            String[] separatedString;
+                            separatedString = data2[j + 1].split(",");
                             List<Integer> ECG = new ArrayList();
                             for (int k = 0; k < separatedString.length; k++) {
                                 ECG.add(k, Integer.parseInt(separatedString[k]));
                             }
                             s.setECG_values(ECG);
-                            break;
-
-                        
-                        case "startDate":
-                        try {
-                            s.setStartDate(format.parse(data2[j + 1]));
-                        } catch (ParseException ex) {
-                            Logger.getLogger(CommunicationWithServer.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        break;
                     }
-                }
             }
-        } catch (IOException ex) {
-            Logger.getLogger(CommunicationWithServer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("hola Recieve Signal");
-        System.out.println(s.toString());
+        } 
+        
         return s;
     }
     
-     public static Signal receiveEMGSignal(BufferedReader br) {
+     public static Signal receiveEMGSignal(BufferedReader br) throws IOException {
+         System.out.println("In receive EMG");
         Signal s = new Signal();
-        try {
-            String line = br.readLine();
-            //System.out.println(line);
-            line = line.replace("{", "");
+        String line = br.readLine();
+        line = line.replace("{", "");
             line = line.replace("Signal", "");
-            String[] atribute = line.split(",");
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
-            for (int i = 0; i < atribute.length; i++) {
+           String[] atribute = line.split("/");
+             for (int i = 0; i < atribute.length; i++) {
                 String[] data2 = atribute[i].split("=");
                 for (int j = 0; j < data2.length - 1; j++) {
-                    data2[j] = data2[j].replaceAll(" ", "").replaceAll("\\[", "").replaceAll("\\]", "");
-                    switch (data2[j]) {
-                        case "signalId":
-                            s.setSignalId(Integer.parseInt(data2[j + 1]));
-                            break;
-                        
-                        case "EMG_values":
-                            String[] separatedString = data2[j + 1].split(",");
-                            List<Integer> EMG = new ArrayList();
+                    data2[j] = data2[j].replace(" ", "");
+                    if(data2[j].equalsIgnoreCase("EMG_values")) {
+                            data2[j+1]=data2[j+1].replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "");
+                            String[] separatedString;
+                            separatedString = data2[j + 1].split(",");
+                            List<Integer> ECG = new ArrayList();
                             for (int k = 0; k < separatedString.length; k++) {
-                                EMG.add(k, Integer.parseInt(separatedString[k]));
+                                ECG.add(k, Integer.parseInt(separatedString[k]));
                             }
-                            s.setEMG_values(EMG);
-                            break;
-                        case "startDate":
-                        try {
-                            s.setStartDate(format.parse(data2[j + 1]));
-                        } catch (ParseException ex) {
-                            Logger.getLogger(CommunicationWithServer.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        break;
+                            s.setECG_values(ECG);
                     }
                 }
             }
-        } catch (IOException ex) {
-            Logger.getLogger(CommunicationWithServer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("hola Recieve Signal");
-        System.out.println(s.toString());
+       
         return s;
     }
 
@@ -316,7 +240,6 @@ public class CommunicationWithServer {
                     }
                 }
             }
-            System.out.println(u.toString());
         } catch (IOException ex) {
             Logger.getLogger(CommunicationWithServer.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -333,7 +256,6 @@ public class CommunicationWithServer {
             bitalino = new BITalino();
             // Code to find Devices
             Vector<RemoteDevice> devices = bitalino.findDevices();
-            System.out.println(devices);
 
             String macAddress = p.getMacAddress();
 
@@ -342,35 +264,21 @@ public class CommunicationWithServer {
             int[] channelsToAcquire = {1, 2}; //for EMG and ECG
             bitalino.start(channelsToAcquire);
 
-            //Read in total 10000000 times --> por que elegimos este num
-            //Each time read a block of 10 samples to make the trials easier, but we plan to change it
             int block_size = 16;
 
-            // Start loop to calculate time to send signal TODO 
             for (int j = 0; j < 750; j++) {
                 frame = bitalino.read(block_size);
 
-                //System.out.println("size block: " + frame.length);
-                //pw.println("ECG:");
-                // TODO CHECK CONDITION NON STOP IF(true) else{ pw.println(-1)
                 for (int i = 0; i < frame.length; i++) {
-                    //pw.println(frame[i].analog[0]);
                     System.out.println(frame[i].analog[0]);
                     ecg_vals.add(frame[i].analog[0]);
                 }
 
-                // pw.println("END OF ECG");
-                //pw.println("EMG:");
-                //frame = bitalino.read(block_size);
                 for (int a = 0; a < frame.length; a++) {
-                    //pw.println(frame[a].analog[1]);
                     System.out.println(frame[a].analog[1]);
                     emg_vals.add(frame[a].analog[1]);
                 }
 
-                //pw.println("END OF EMG");
-                //pw.println("ECG: " + ecg_vals.toString() + " // " + "EMG: " + emg_vals.toString());
-                //pw.println("END");
             }
             bitalino.stop();
             pw.println(ecg_vals.size());
@@ -382,38 +290,6 @@ public class CommunicationWithServer {
                 pw.println(emg_vals.get(m));
             }
 
-            //Type of signal + date ".txt"
-            /*Calendar c = Calendar.getInstance();
-            String day = Integer.toString(c.get(Calendar.DATE));
-            String month = Integer.toString(c.get(Calendar.MONTH));
-            String year = Integer.toString(c.get(Calendar.YEAR));
-
-            String ruta = "../TSAppClient/ECG" + day + month + year + ".txt";
-            String ruta2 = "../TSAppClient/EMG" + day + month + year + ".txt";
-            //String contenido = Arrays.toString(s.getECG_values());
-            String contenido = ecg_vals.toString();
-            String contenido2 = emg_vals.toString();
-            //String contenido2 = Arrays.toString(s.getEMG_values());
-            File file = new File(ruta);
-            File file2 = new File(ruta2);
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            if (!file2.exists()) {
-                file2.createNewFile();
-            }
-            FileWriter fwECG = new FileWriter(file);
-            FileWriter fwEMG = new FileWriter(file2);
-            BufferedWriter bwECG = new BufferedWriter(fwECG);
-            BufferedWriter bwEMG = new BufferedWriter(fwEMG);
-            bwECG.write(contenido);
-            bwEMG.write(contenido2);
-            bwECG.close();
-            bwEMG.close();
-
-            //pw.println("ECG"+ day+month+year );
-            //pw.println("EMG"+ day+month+year );*/
-            System.out.println("Ok");
         } catch (BITalinoException ex) {
             Logger.getLogger(CommunicationWithServer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Throwable ex) {
@@ -435,8 +311,7 @@ public class CommunicationWithServer {
         try {
             List<String> filenames = new ArrayList();
 
-            // VOY A ASUMIR QUE SE ENVIAN LOS FILENAME SEPARADOS POR \n
-            int size = Integer.parseInt(bf.readLine()); //aqui coge el size que se envia 
+            int size = Integer.parseInt(bf.readLine()); 
             for (int i = 0; i < size; i++) {
                 filenames.add(bf.readLine());
             }
@@ -455,7 +330,6 @@ public class CommunicationWithServer {
                 String line = bf.readLine();
                 if (!line.equalsIgnoreCase("End of list")) {
                     stop = true;
-                    System.out.println(line);
                     patientList.add(line);
                 } else {
                     stop = false;

@@ -110,14 +110,12 @@ public class Menu {
             logInCorrect = false;
             pw.println(2);
         } else if (line.equals("patient")) {
-            //patientMenu(socket, inputStream, outputStream, br, pw, user.getUserId());
             logInCorrect = true;
             patient = patientUtilities.CommunicationWithServer.receivePatient(br);
 
         } else if (line.equals("doctor")) {
             logInCorrect = true;
-            patient = patientUtilities.CommunicationWithServer.receivePatient(br);
-            //doctorMenu(socket, inputStream, outputStream, br, pw);              
+            patient = patientUtilities.CommunicationWithServer.receivePatient(br);            
         }
         System.out.println("Fin de funcion menu");
         return logInCorrect;
@@ -135,15 +133,14 @@ public class Menu {
         return sList;
     }
     
-    public static List<Integer> showSignal(String filename){
+    public static List<Integer> showSignal(String filename) throws IOException{
         Signal s;
+        pw.println(filename);
         if (filename.contains("ECG")){
             s= CommunicationWithServer.receiveECGSignal(br);
-            System.out.println(s.getECG_values());
             return s.getECG_values();
         }else{
             s=CommunicationWithServer.receiveEMGSignal(br);
-            System.out.println(s.getEMG_values());
             return s.getEMG_values();
         }
     }

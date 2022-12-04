@@ -151,6 +151,6 @@ public class Signal {
     @Override
     public String toString() {
         
-        return "Signal{" + "signalId=" + signalId + ", ECG_values=" + ECG_values + ", EMG_values=" + EMG_values + ", startDate=" + startDate + '}';
+        return "Signal{" + "signalId=" + signalId + " ECG_values=" + ECG_values + " EMG_values=" + EMG_values + " startDate=" + startDate + '}';
     }
 }

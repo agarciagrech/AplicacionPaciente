@@ -45,8 +45,8 @@ public class ShowSignalController {
     @FXML
     private LineChart<?, ?> Graph;
     
-    @FXML
-    private TextField txtFilename;
+     @FXML
+    private TextField txtSignalFilename;
     
     @FXML
     private Button consultFilenames;
@@ -56,6 +56,15 @@ public class ShowSignalController {
     
     @FXML
     private Button backButton;
+    
+    @FXML
+    private TextField SectionLabel;
+    
+    @FXML
+    private Button SelectSignalButton;
+        
+    private String section;
+    private List<Integer> data;
     
     
     @FXML
@@ -77,6 +86,7 @@ public class ShowSignalController {
     
      @FXML
     void showFilenames(ActionEvent event) {
+        
         Window owner = consultFilenames.getScene().getWindow();
         List<String> list = Menu.showSignalList();
         showAlert(Alert.AlertType.INFORMATION,owner,"Signals of patient",list.toString());
@@ -91,43 +101,22 @@ public class ShowSignalController {
        alert.show();
        }
     
+       @FXML
+    void SelectSignal(ActionEvent event) throws IOException {
+       String filename;
+       filename = txtSignalFilename.getText();
+       data = Menu.showSignal(filename);
+    }
+    
     @FXML
     void Display(ActionEvent event) throws FileNotFoundException, IOException {
-        XYChart.Series series = new XYChart.Series();
-        /*series.getData().add(new XYChart.Data(1,10));
-        series.getData().add(new XYChart.Data(2,12));
-        series.getData().add(new XYChart.Data(3,4));
-        series.getData().add(new XYChart.Data(4,5));
-        series.getData().add(new XYChart.Data(5,8));
-        series.getData().add(new XYChart.Data(6,7));
-        series.getData().add(new XYChart.Data(7,1));
-        series.getData().add(new XYChart.Data(8,10));
-        series.getData().add(new XYChart.Data(9,0));
-        Graph.getData().add(series);*/
-        /*
-        String ruta1;
-        String cadena1;
-        List<Integer> values = new ArrayList();
-        FileReader f = null;
-        BufferedReader b = null;
-        
-        ruta1 = "C:/Users/jaime/OneDrive/Escritorio/4º Ingeniería Biomédica/Primer cuatri/Telemedicina/TSApp/PatientTS/bECG29102022_115334300.txt";
-            f = new FileReader(ruta1);
-            b = new BufferedReader(f);
-            while((cadena1 = b.readLine())!=null) {
-                String[] separatedCadena = cadena1.replaceAll("\\[", "").replaceAll("]", "").replace(" ", "").split(",");
-                for (int i=0; i < separatedCadena.length;i++){
-                    values.add(i, Integer.parseInt(separatedCadena[i]));
-                }
-
-             }
-        for (int i =0; i<values.size();i++){
-            String x = ""+i;
-            series.getData().add(new XYChart.Data(x,values.get(i)));
+       XYChart.Series series = new XYChart.Series();
+       section = SectionLabel.getText();
+       
+       for (int i =0; i<600/*values.size()*/;i++){
+            series.getData().add(new XYChart.Data(i,data.get(i + 600*(Integer.parseInt(section)))));
         }
-        Graph.getData().addAll(series);*/
-       String filename = txtFilename.getText();
-       List<Integer> data = Menu.showSignal(filename);
+        Graph.getData().addAll(series);
         
         
     }

@@ -38,24 +38,7 @@ public class ConnectController {
 
     @FXML
     void connect(ActionEvent event) {
-        //Window owner = connect.getScene().getWindow();
-        /*boolean connected = false;
-        do {
-            String ip = iptext.getText();
-            try {
-
-                Menu.initiliazeStreams(ip);
-
-                // habilito el boton 
-                // o utilizo un boolean que deje ir
-            } catch (IOException e) {
-                //System.out.println("AQUI IRIA EL CODIGO");
-                infoMessage("Please enter a correct IP Address", null, "Failed");
-
-            }
-            connected = true;
-        } while (!connected);*/
-
+     
         String ip = iptext.getText();
         try {
             Menu.initiliazeStreams(ip);
