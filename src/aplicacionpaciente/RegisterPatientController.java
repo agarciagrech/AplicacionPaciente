@@ -90,7 +90,30 @@ public class RegisterPatientController {
     void registerPatient(ActionEvent event) throws Exception {
         Window owner = registerPatientButton.getScene().getWindow();
         
-        
+        if(this.txtname.getText().isEmpty()){
+            showAlert(Alert.AlertType.ERROR, owner, "Error!", "Please enter the name");
+            return;
+        }
+        if(this.txtsurname.getText().isEmpty()){
+            showAlert(Alert.AlertType.ERROR, owner, "Error!", "Please enter the surname");
+            return;
+        }
+        if(this.txtaddress.getText().isEmpty()){
+            showAlert(Alert.AlertType.ERROR, owner, "Error!", "Please enter the address");
+            return;
+        }
+        if(this.txtdiagnosis.getText().isEmpty()){
+            showAlert(Alert.AlertType.ERROR, owner, "Error!", "Please enter the diagnosis");
+            return;
+        }
+        if(this.txtdob.getText().isEmpty()){
+            showAlert(Alert.AlertType.ERROR, owner, "Error!", "Please enter the date of birth");
+            return;
+        }
+        if(this.txtmacAddress.getText().isEmpty()){
+            showAlert(Alert.AlertType.ERROR, owner, "Error!", "Please enter the macAddress of your Bitalino");
+            return;
+        }
         String name = txtname.getText();
         String surname = txtsurname.getText();
         String email = txtemail.getText();
@@ -105,10 +128,14 @@ public class RegisterPatientController {
            gender = "Female";
         }
         Date dob = new Date(txtdob.getText());
-        Integer medCard = Integer.parseInt(txtmedCardNumber.getText());
+        String medCardNum = txtmedCardNumber.getText();
         String allergies = txtallergies.getText();
         String macAddress = txtmacAddress.getText();
-        //Patient p = new Patient(name, surname, medical_card_number, dob, address, email, diagnosis, allergies, gender, userId, macAddress);
+        boolean correctData = ComprobarData(name,surname,diagnosis,allergies,medCardNum);
+        if(!correctData){
+            infoMessage("Please enter the data correctly", null, "Failed");
+        }else{
+        int medCard = Integer.parseInt(medCardNum);
         String usernamePass = Menu.registerPatient( medCard,name, surname, dob, address, email, diagnosis, allergies, gender, macAddress);
         
        
@@ -129,6 +156,7 @@ public class RegisterPatientController {
                 e.printStackTrace();
             }
         }
+    }
     }
 
     @FXML
@@ -175,5 +203,76 @@ public class RegisterPatientController {
        alert.initOwner(owner);
        alert.show();
        }
+      
+      public boolean ComprobarData(String name, String surname, String diagnosis, String allergies, String medcard){
+          
+        
+        char[] chars = name.toCharArray();
+        boolean validData = true;
+
+        for (char c : chars) {
+            if (Character.isDigit(c)) {
+                validData = false;
+                this.txtname.clear();
+                break;
+            }
+        }
+        
+        char[] chars2 = surname.toCharArray();
+        for(char c1: chars){
+            if(Character.isDigit(c1)){
+                validData = false;
+                this.txtsurname.clear();
+                break;
+            }
+           
+        }
+        
+        char[] chars3 = allergies.toCharArray();
+        for(char c2: chars){
+            if(Character.isDigit(c2)){
+                validData = false;
+                this.txtsurname.clear();
+                break;
+            }
+           
+        }
+        
+        char[] chars4 = diagnosis.toCharArray();
+        for(char c2: chars){
+            if(Character.isDigit(c2)){
+                validData = false;
+                this.txtsurname.clear();
+                break;
+            }
+           
+        }
+        
+        char[] chars5 = medcard.toCharArray();
+        for(char c3: chars){
+            if(!Character.isDigit(c3)){
+                validData = false;
+                this.txtsurname.clear();
+                break;
+            }
+           
+        }
+
+        if (this.txtname.getText().equals("")) {
+            validData = false;
+           
+        }
+        if (this.txtsurname.getText().equals("")) {
+            validData = false;
+           
+        }
+        if (this.txtdiagnosis.getText().equals("")){
+            validData = false;
+        }
+        if (this.txtmedCardNumber.getText().equals("")){
+            validData = false;
+        }
+        return validData;
+    }
     
 }

@@ -67,13 +67,11 @@ public class MenuPatientController {
 
     @FXML
     void Record(ActionEvent event) throws MalformedURLException, IOException {
-        System.out.println("Hola");
         try{
             URL url = new File("src/aplicacionpaciente/recordSignal.fxml").toURI().toURL();
             Parent root = FXMLLoader.load(url);    
             Scene scene = new Scene(root);
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            System.out.println("Se creo record");
             stage.setScene(scene);
             stage.show();
         }catch(Exception e){
@@ -84,9 +82,6 @@ public class MenuPatientController {
 
     @FXML
     void ShowSignal(ActionEvent event) throws MalformedURLException, IOException {
-        /*Window owner = ShowSignalButton.getScene().getWindow();
-        List <String> sList = Menu.showSignalList();
-        showSignals(Alert.AlertType.INFORMATION, owner, "Signals of patient",sList.toString());*/
         URL url = new File("src/aplicacionpaciente/showSignal.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);    
         Scene scene = new Scene(root);
@@ -103,7 +98,6 @@ public class MenuPatientController {
             Parent root = FXMLLoader.load(url);    
             Scene scene = new Scene(root);
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            System.out.println("Se creo record");
             stage.setScene(scene);
             stage.show();
         }catch(Exception e){

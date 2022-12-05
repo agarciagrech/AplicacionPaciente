@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.BottomNavigation?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
@@ -9,30 +8,29 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="571.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacionpaciente.ShowSignalController">
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacionpaciente.ShowSignalController">
    <children>
-      <LineChart fx:id="Graph" layoutX="-248.0" layoutY="48.0" prefHeight="523.0" prefWidth="1118.0" scaleX="0.5" scaleY="0.8">
+      <LineChart fx:id="Graph" layoutX="-817.0" layoutY="-12.0" prefHeight="1023.0" prefWidth="3445.0" scaleX="0.5" scaleY="0.8">
         <xAxis>
-          <NumberAxis side="BOTTOM" tickLabelGap="1.0" upperBound="6000.0" />
+          <NumberAxis side="BOTTOM" tickLabelGap="1.0" upperBound="1000.0" />
         </xAxis>
         <yAxis>
           <NumberAxis side="LEFT" tickLabelGap="1.0" upperBound="1000.0" />
         </yAxis>
       </LineChart>
-      <Button fx:id="SelectSignalButton" layoutX="700.0" layoutY="245.0" mnemonicParsing="false" onAction="#SelectSignal" text="Select signal" />
-      <Button fx:id="consultFilenames" layoutX="606.0" layoutY="165.0" mnemonicParsing="false" onAction="#showFilenames" text="Consult Filenames " />
-      <TextField fx:id="txtSignalFilename" layoutX="603.0" layoutY="247.0" prefHeight="26.0" prefWidth="67.0" promptText="Filename" />
-      <TextField fx:id="SectionLabel" layoutX="603.0" layoutY="374.0" prefHeight="26.0" prefWidth="90.0" promptText="Section Num." />
-      <Button fx:id="DisplayButton" layoutX="693.0" layoutY="372.0" mnemonicParsing="false" onAction="#Display" text="Display section" />
-      <Text layoutX="384.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" SHOW SIGNAL">
+      <Button fx:id="SelectSignalButton" layoutX="887.0" layoutY="937.0" mnemonicParsing="false" onAction="#SelectSignal" text="Select signal" />
+      <Button fx:id="consultFilenames" layoutX="486.0" layoutY="938.0" mnemonicParsing="false" onAction="#showFilenames" text="Consult Filenames " />
+      <TextField fx:id="txtSignalFilename" layoutX="696.0" layoutY="937.0" prefHeight="26.0" prefWidth="67.0" promptText="Filename" />
+      <TextField fx:id="SectionLabel" layoutX="1340.0" layoutY="936.0" prefHeight="26.0" prefWidth="90.0" promptText="Section Num." />
+      <Button fx:id="DisplayButton" layoutX="1430.0" layoutY="936.0" mnemonicParsing="false" onAction="#Display" text="Display section" />
+      <Text layoutX="384.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Show signal:">
          <font>
-            <Font size="16.0" />
+            <Font name="Berlin Sans FB" size="16.0" />
          </font>
       </Text>
-      <Text layoutX="603.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Introduce the name of the signal to view" />
-      <Text layoutX="601.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Now introduce the number of the section" />
-      <BottomNavigation layoutX="224.0" layoutY="253.0" />
-      <Button fx:id="exitButton" layoutX="891.0" layoutY="14.0" mnemonicParsing="false" onAction="#exitApp" text="Exit" />
+      <Text layoutX="209.0" layoutY="955.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Introduce the name of the signal to view" />
+      <Text layoutX="1063.0" layoutY="953.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Now introduce the number of the section" />
+      <Button fx:id="exitButton" layoutX="1750.0" layoutY="17.0" mnemonicParsing="false" onAction="#exitApp" text="Exit" />
       <Button fx:id="backButton" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#back" text="Back" />
    </children>
 </AnchorPane>

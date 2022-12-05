@@ -4,11 +4,13 @@
  */
 package aplicacionpaciente;
 
+import static aplicacionpaciente.RegisterPatientController.infoMessage;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import patientUtilities.Menu;
 import static patientUtilities.Menu.br;
@@ -36,9 +38,8 @@ public class RecordSignalController {
 
     @FXML
     void record(ActionEvent event) {
-        System.out.println("aca dentro del record");
         Menu.recordSignal();
-        System.out.println("La señal se ha grabado");
+        infoMessage("End of recording signal", null, "End");
     }
     
     
@@ -51,6 +52,14 @@ public class RecordSignalController {
     void exit(ActionEvent event) {
         Menu.exit();
     }
+    
+    public static void infoMessage(String infoMessage, String headerText, String title) {
+       Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+           alert.setContentText(infoMessage);
+           alert.setTitle(title);
+           alert.setHeaderText(headerText);
+           alert.showAndWait();
+       }
     
     
 }

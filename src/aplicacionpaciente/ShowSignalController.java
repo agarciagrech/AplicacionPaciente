@@ -110,12 +110,15 @@ public class ShowSignalController {
     
     @FXML
     void Display(ActionEvent event) throws FileNotFoundException, IOException {
-       XYChart.Series series = new XYChart.Series();
+        Graph.getData().clear();
+        XYChart.Series series = new XYChart.Series();
+       
        section = SectionLabel.getText();
        
        for (int i =0; i<600/*values.size()*/;i++){
             series.getData().add(new XYChart.Data(i,data.get(i + 600*(Integer.parseInt(section)))));
         }
+      
         Graph.getData().addAll(series);
         
         
