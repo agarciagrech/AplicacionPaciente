@@ -39,14 +39,14 @@ public class UpdatePatientController {
     private Button exitButton;
     
     @FXML
-    private Button BackButton;
+    private Button backButton;
     
     @FXML
     void exit (ActionEvent event) {
         Menu.exit();
     }
     @FXML
-    void Back(ActionEvent event) throws IOException {
+    void back(ActionEvent event) throws IOException {
         URL url = new File("src/aplicacionpaciente/menuPatient.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);
         Scene scene = new Scene(root);
