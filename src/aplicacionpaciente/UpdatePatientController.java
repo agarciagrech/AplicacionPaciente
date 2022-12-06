@@ -20,16 +20,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import patientUtilities.Menu;
 
-/**
- * FXML Controller class
- *
- * @author jaime
- */
+
 public class UpdatePatientController {
 
-    /**
-     * Initializes the controller class.
-     */
     @FXML
     private TextField MacAddressLabel;
 
@@ -45,6 +38,7 @@ public class UpdatePatientController {
     void exit (ActionEvent event) {
         Menu.exit();
     }
+    
     @FXML
     void back(ActionEvent event) throws IOException {
         URL url = new File("src/aplicacionpaciente/menuPatient.fxml").toURI().toURL();
@@ -61,17 +55,15 @@ public class UpdatePatientController {
         String macAddress = MacAddressLabel.getText();
         Menu.updateMacAddress(macAddress);
         try{
-                
-                URL url = new File("src/aplicacionpaciente/menuPatient.fxml").toURI().toURL();
-                Parent root = FXMLLoader.load(url);    
-                Scene scene = new Scene(root);
-                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            URL url = new File("src/aplicacionpaciente/menuPatient.fxml").toURI().toURL();
+            Parent root = FXMLLoader.load(url);    
+            Scene scene = new Scene(root);
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
-                stage.setScene(scene);
-                stage.show();
-            }catch(Exception e){
-                e.printStackTrace();
-            }
+            stage.setScene(scene);
+            stage.show();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }   
-    
 }

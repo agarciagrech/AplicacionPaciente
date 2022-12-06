@@ -184,7 +184,6 @@ public class CommunicationWithServer {
     }
     
      public static Signal receiveEMGSignal(BufferedReader br) throws IOException {
-         System.out.println("In receive EMG");
         Signal s = new Signal();
         String line = br.readLine();
         line = line.replace("{", "");
@@ -211,7 +210,6 @@ public class CommunicationWithServer {
     }
 
     public static User receiveUser(BufferedReader br) {
-        System.out.println("in receive user");
         User u = new User();
         try {
             String line = br.readLine();
@@ -306,7 +304,6 @@ public class CommunicationWithServer {
         }
     }
 
-    // This method is going to return the filenames of all the signals recorded:
     public static List<String> ShowSignals(BufferedReader bf, PrintWriter pw) {
         try {
             List<String> filenames = new ArrayList();

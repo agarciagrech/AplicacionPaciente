@@ -94,16 +94,11 @@ public class Menu {
     }
     
     public static boolean login(String username, String password) throws Exception {
-        System.out.println("Prepw");
         pw.println(2);
-        System.out.println("post pw");
         boolean logInCorrect = false;
-        System.out.println("preuser");
         User user = new User();
         user.setPassword(password);
         user.setUsername(username);
-        System.out.println("postuser");
-        System.out.println("Dentro de la funcion menu");
         patientUtilities.CommunicationWithServer.sendUser(pw, user);
         String line = br.readLine();
         if (line.equals("Wrong username or password")) {
@@ -117,7 +112,6 @@ public class Menu {
             logInCorrect = true;
             patient = patientUtilities.CommunicationWithServer.receivePatient(br);            
         }
-        System.out.println("Fin de funcion menu");
         return logInCorrect;
     }
     
@@ -152,28 +146,23 @@ public class Menu {
         patientUtilities.CommunicationWithServer.sendPatient(pw, patient);
     }
 
-    // BACK TO OTHER WINDOWS FUNCTIONS:
     public static void backTologin() {
         pw.println(2);
-        System.out.println("I'm in back to login");
     }
     
     public static void backToMenu(){
         pw.println();
-        System.out.println("back in menu");
     }
     
      public static void goToregister() {
         pw.println(1);
     }
 
-     // EXIT FROM SERVER: 
     public static void exit() {
         pw.println(0);
         pw.println(0);
         patientUtilities.CommunicationWithServer.ReleaseResources(pw, br);
         patientUtilities.CommunicationWithServer.exitFromServer(inputStream, outputStream, socket);
-
         System.exit(0);
     }
 }

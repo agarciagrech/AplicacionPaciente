@@ -29,12 +29,7 @@ import patientUtilities.Menu;
  * @author jaime
  */
 public class MenuPatientController {
-
-    /**
-     * Initializes the controller class.
-     */
-   
-
+    
     @FXML
     private Button RecordButton;
 
@@ -54,6 +49,7 @@ public class MenuPatientController {
     void exit (ActionEvent event) {
         Menu.exit();
     }
+    
     @FXML
     void Back(ActionEvent event) throws IOException {
         URL url = new File("src/aplicacionpaciente/logIn.fxml").toURI().toURL();
@@ -74,9 +70,8 @@ public class MenuPatientController {
             stage.setScene(scene);
             stage.show();
         }catch(Exception e){
-                e.printStackTrace();
+            e.printStackTrace();
         }
-         
     }
 
     @FXML
@@ -87,7 +82,6 @@ public class MenuPatientController {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
-        
     }
 
     @FXML
@@ -100,7 +94,7 @@ public class MenuPatientController {
             stage.setScene(scene);
             stage.show();
         }catch(Exception e){
-                e.printStackTrace();
+            e.printStackTrace();
         }
     }
     
@@ -112,6 +106,4 @@ public class MenuPatientController {
        alert.initOwner(owner);
        alert.show();
     }
-
-    
 }

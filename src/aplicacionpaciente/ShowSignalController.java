@@ -29,16 +29,9 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import patientUtilities.Menu;
 
-/**
- * FXML Controller class
- *
- * @author jaime
- */
+
 public class ShowSignalController {
 
-    /**
-     * Initializes the controller class.
-     */
     @FXML
     private Button DisplayButton;
 
@@ -84,9 +77,8 @@ public class ShowSignalController {
          Menu.exit();
     }
     
-     @FXML
+    @FXML
     void showFilenames(ActionEvent event) {
-        
         Window owner = consultFilenames.getScene().getWindow();
         List<String> list = Menu.showSignalList();
         showAlert(Alert.AlertType.INFORMATION,owner,"Signals of patient",list.toString());
@@ -99,9 +91,9 @@ public class ShowSignalController {
        alert.setContentText(message);
        alert.initOwner(owner);
        alert.show();
-       }
+    }
     
-       @FXML
+    @FXML
     void SelectSignal(ActionEvent event) throws IOException {
        String filename;
        filename = txtSignalFilename.getText();
@@ -113,15 +105,11 @@ public class ShowSignalController {
         Graph.getData().clear();
         XYChart.Series series = new XYChart.Series();
        
-       section = SectionLabel.getText();
+        section = SectionLabel.getText();
        
-       for (int i =0; i<600/*values.size()*/;i++){
+        for (int i =0; i<600/*values.size()*/;i++){
             series.getData().add(new XYChart.Data(i,data.get(i + 600*(Integer.parseInt(section)))));
-        }
-      
+         }
         Graph.getData().addAll(series);
-        
-        
     }
-    
 }

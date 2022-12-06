@@ -30,10 +30,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import patientUtilities.Menu;
 
-/**
- *
- * @author agarc
- */
+
 public class RegisterPatientController {
     @FXML
     private TextField txtname;
@@ -168,8 +165,8 @@ public class RegisterPatientController {
 
     @FXML
     void backtoMenu(ActionEvent event) throws MalformedURLException, IOException {
-          Menu.backToMenu();
-        URL url = new File("src/aplicacionpaciente/menuPatient.fxml").toURI().toURL();
+        Menu.backTologin();
+        URL url = new File("src/aplicacionpaciente/logIn.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);    
         Scene scene = new Scene(root);
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -181,7 +178,6 @@ public class RegisterPatientController {
     @FXML
     void exitApp(ActionEvent event) {
         Menu.exit();
-
     }
     
     public static void showAlert2(Alert.AlertType alertType, Window owner, String title, String message ) {

@@ -35,85 +35,70 @@ public class logInController {
 
     @FXML
     private TextField Password;
-
-    @FXML
-    private Button exitButton;
     
     @FXML
     private Button register;
+   
     
-
     @FXML
-    void exit(ActionEvent event) {
-
-    }
-    
-     @FXML
     void register(ActionEvent event) throws IOException {
-         Menu.goToregister();
-         URL url = new File("src/aplicacionpaciente/registerPatient.fxml").toURI().toURL();
-         Parent root = FXMLLoader.load(url);    
-         Scene scene = new Scene(root);
-         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-         stage.setScene(scene);
-         stage.show();
+        Menu.goToregister();
+        URL url = new File("src/aplicacionpaciente/registerPatient.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);    
+        Scene scene = new Scene(root);
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
     void logIn(ActionEvent event) throws  IOException, Exception {
-        
         Window owner = logInButton.getScene().getWindow();
+        
         if(Username.getText().isEmpty()){
             showAlert(Alert.AlertType.ERROR, owner, "Error!", "Please enter your username");
             return;
         }
+        
         if(Password.getText().isEmpty()){
              showAlert(Alert.AlertType.ERROR, owner, "Error!", "Please enter your password");
              return;
         }
         
-        
-        
         String username = Username.getText();
         String password = Password.getText();
-        System.out.println("Empezando login");
         Boolean logInCheck = Menu.login(username, password);
-        System.out.println("Ya he hecho la funcion de login, menu");
+        
         if(!logInCheck){
             infoMessage("Please enter correct username or password", null, "Failed");
         }else{
             try{
-                
                 URL url = new File("src/aplicacionpaciente/menuPatient.fxml").toURI().toURL();
                 Parent root = FXMLLoader.load(url);    
                 Scene scene = new Scene(root);
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
                 stage.setScene(scene);
                 stage.show();
             }catch(Exception e){
                 e.printStackTrace();
             }
         }
-        
-        
-
     }
+    
     public static void infoMessage(String infoMessage, String headerText, String title) {
-       Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-           alert.setContentText(infoMessage);
-           alert.setTitle(title);
-           alert.setHeaderText(headerText);
-           alert.showAndWait();
-       }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText(infoMessage);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.showAndWait();
+    }
 
-       public static void showAlert(Alert.AlertType alertType, Window owner, String title, String message ) {
+    public static void showAlert(Alert.AlertType alertType, Window owner, String title, String message ) {
        Alert alert = new Alert(alertType);
        alert.setTitle(title);
        alert.setHeaderText(null);
        alert.setContentText(message);
        alert.initOwner(owner);
        alert.show();
-       }
-    
+    }
 }
