@@ -4,10 +4,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="aplicacionpaciente.ConnectController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacionpaciente.ConnectController">
    <children>
-      <Button fx:id="connect" layoutX="257.0" layoutY="200.0" mnemonicParsing="false" onAction="#connect" prefHeight="26.0" prefWidth="74.0" text="Connect" />
+      <Button fx:id="connect" layoutX="241.0" layoutY="200.0" mnemonicParsing="false" onAction="#connect" prefHeight="26.0" prefWidth="118.0" text="Connect" />
       <TextField fx:id="iptext" layoutX="226.0" layoutY="138.0" promptText="IP Address" />
    </children>
 </AnchorPane>
