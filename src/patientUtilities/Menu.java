@@ -106,11 +106,12 @@ public class Menu {
             pw.println(2);
         } else if (line.equals("patient")) {
             logInCorrect = true;
+            pw.println(0);
             patient = patientUtilities.CommunicationWithServer.receivePatient(br);
-
-        } else if (line.equals("doctor")) {
-            logInCorrect = true;
-            patient = patientUtilities.CommunicationWithServer.receivePatient(br);            
+         } else if (line.equals("doctor")) {
+            logInCorrect = false;
+            pw.println(1);
+            pw.println(2);           
         }
         return logInCorrect;
     }

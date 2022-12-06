@@ -54,12 +54,10 @@ public class logInController {
     @FXML
     void logIn(ActionEvent event) throws  IOException, Exception {
         Window owner = logInButton.getScene().getWindow();
-        
         if(Username.getText().isEmpty()){
             showAlert(Alert.AlertType.ERROR, owner, "Error!", "Please enter your username");
             return;
         }
-        
         if(Password.getText().isEmpty()){
              showAlert(Alert.AlertType.ERROR, owner, "Error!", "Please enter your password");
              return;
@@ -67,6 +65,7 @@ public class logInController {
         
         String username = Username.getText();
         String password = Password.getText();
+        
         Boolean logInCheck = Menu.login(username, password);
         
         if(!logInCheck){

@@ -26,15 +26,12 @@ public class CommunicationWithServer {
 
     public static Socket connectToServer(String ip) throws IOException {
         Socket socket = new Socket();
-        //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         socket = new Socket(ip, 9000);
         InputStream inputStream = socket.getInputStream();
         OutputStream outputStream = socket.getOutputStream();
         PrintWriter printWriter = new PrintWriter(outputStream, true);
         BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
-
         return socket;
-        
     }
 
     public static void sendDoctor(PrintWriter pw, Doctor doctor) {
@@ -213,7 +210,6 @@ public class CommunicationWithServer {
         User u = new User();
         try {
             String line = br.readLine();
-            System.out.println(line);
             line = line.replace("{", "");
             line = line.replace("User", "");
             line = line.replace("}", "");
