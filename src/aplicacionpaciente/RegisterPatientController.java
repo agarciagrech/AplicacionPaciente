@@ -115,12 +115,6 @@ public class RegisterPatientController {
         String name = txtname.getText();
         String surname = txtsurname.getText();
         String email = txtemail.getText();
-        Pattern pattern = Pattern.compile("([a-z0-9]+(\\.?[a-z0-9])*)+@(([a-z]+)\\.([a-z]+))+");
-        Matcher matcher = pattern.matcher(email);
-        if (matcher.find() == false) {
-            showAlert(Alert.AlertType.ERROR, owner, "Error!", "Please enter a valid email");
-            return;
-        }
         String address = txtaddress.getText();
         String diagnosis = txtdiagnosis.getText();
         String gender = "";
@@ -135,12 +129,12 @@ public class RegisterPatientController {
         String medCardNum = txtmedCardNumber.getText();
         String allergies = txtallergies.getText();
         String macAddress = txtmacAddress.getText();
-        boolean correctData = ComprobarData(name,surname,diagnosis,allergies,medCardNum);
+        boolean correctData = ComprobarData(name, surname, diagnosis, email, allergies,medCardNum);
         if(!correctData){
             infoMessage("Please enter the data correctly", null, "Failed");
         }else{
         int medCard = Integer.parseInt(medCardNum);
-        String usernamePass = Menu.registerPatient( medCard,name, surname, dob, address, email, diagnosis, allergies, gender, macAddress);
+        String usernamePass = Menu.registerPatient( medCard, name, surname, dob, address, email, diagnosis, allergies, gender, macAddress);
         
        
         if(usernamePass==null){
@@ -208,7 +202,7 @@ public class RegisterPatientController {
         alert.show();
     }
       
-    public boolean ComprobarData(String name, String surname, String diagnosis, String allergies, String medcard){
+    public boolean ComprobarData(String name, String surname, String diagnosis, String email, String allergies, String medcard){
         char[] chars = name.toCharArray();
         boolean validData = true;
 
@@ -221,37 +215,44 @@ public class RegisterPatientController {
         }
         
         char[] chars2 = surname.toCharArray();
-        for(char c1: chars){
-            if(Character.isDigit(c1)){
+        for(char c2: chars2){
+            if(Character.isDigit(c2)){
                 validData = false;
                 this.txtsurname.clear();
                 break;
             }
         }
         
+        Pattern pattern = Pattern.compile("([a-z0-9]+(\\.?[a-z0-9])*)+@(([a-z]+)\\.([a-z]+))+");
+        Matcher matcher = pattern.matcher(email);
+        if (matcher.find() == false) {
+            validData = false;
+            this.txtemail.clear();
+        }
+        
         char[] chars3 = allergies.toCharArray();
-        for(char c2: chars){
-            if(Character.isDigit(c2)){
+        for(char c3: chars3){
+            if(Character.isDigit(c3)){
                 validData = false;
-                this.txtsurname.clear();
+                this.txtallergies.clear();
                 break;
             }
         }
         
         char[] chars4 = diagnosis.toCharArray();
-        for(char c2: chars){
-            if(Character.isDigit(c2)){
+        for(char c4: chars4){
+            if(Character.isDigit(c4)){
                 validData = false;
-                this.txtsurname.clear();
+                this.txtdiagnosis.clear();
                 break;
             }
         }
         
         char[] chars5 = medcard.toCharArray();
-        for(char c3: chars){
-            if(!Character.isDigit(c3)){
+        for(char c5: chars5){
+            if(!Character.isDigit(c5)){
                 validData = false;
-                this.txtsurname.clear();
+                this.txtmedCardNumber.clear();
                 break;
             }
         }
@@ -260,6 +261,9 @@ public class RegisterPatientController {
             validData = false;
         }
         if (this.txtsurname.getText().equals("")) {
+            validData = false;
+        }
+        if (this.txtemail.getText().equals("")){
             validData = false;
         }
         if (this.txtdiagnosis.getText().equals("")){
