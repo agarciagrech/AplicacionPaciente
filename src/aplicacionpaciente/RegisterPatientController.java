@@ -10,7 +10,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
-import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,10 +35,10 @@ import patientUtilities.Menu;
  * @author agarc
  */
 public class RegisterPatientController {
-     @FXML
+    @FXML
     private TextField txtname;
 
-   @FXML
+    @FXML
     private RadioButton RBMale;
 
     @FXML
@@ -117,6 +118,12 @@ public class RegisterPatientController {
         String name = txtname.getText();
         String surname = txtsurname.getText();
         String email = txtemail.getText();
+        Pattern pattern = Pattern.compile("([a-z0-9]+(\\.?[a-z0-9])*)+@(([a-z]+)\\.([a-z]+))+");
+        Matcher matcher = pattern.matcher(email);
+        if (matcher.find() == false) {
+            showAlert(Alert.AlertType.ERROR, owner, "Error!", "Please enter a valid email");
+            return;
+        }
         String address = txtaddress.getText();
         String diagnosis = txtdiagnosis.getText();
         String gender = "";
@@ -176,7 +183,8 @@ public class RegisterPatientController {
         Menu.exit();
 
     }
-     public static void showAlert2(Alert.AlertType alertType, Window owner, String title, String message ) {
+    
+    public static void showAlert2(Alert.AlertType alertType, Window owner, String title, String message ) {
        Alert alert = new Alert(alertType);
        alert.setTitle(title);
        alert.setHeaderText(null);
@@ -185,28 +193,26 @@ public class RegisterPatientController {
        alert.show();
     }
      
-     public static void infoMessage(String infoMessage, String headerText, String title) {
-       Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-           alert.setContentText(infoMessage);
-           alert.setTitle(title);
-           alert.setHeaderText(headerText);
-           alert.showAndWait();
-       }
+    public static void infoMessage(String infoMessage, String headerText, String title) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText(infoMessage);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.showAndWait();
+    }
      
     
      
-      public static void showAlert(Alert.AlertType alertType, Window owner, String title, String message ) {
-       Alert alert = new Alert(alertType);
-       alert.setTitle(title);
-       alert.setHeaderText(null);
-       alert.setContentText(message);
-       alert.initOwner(owner);
-       alert.show();
-       }
+    public static void showAlert(Alert.AlertType alertType, Window owner, String title, String message ) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.initOwner(owner);
+        alert.show();
+    }
       
-      public boolean ComprobarData(String name, String surname, String diagnosis, String allergies, String medcard){
-          
-        
+    public boolean ComprobarData(String name, String surname, String diagnosis, String allergies, String medcard){
         char[] chars = name.toCharArray();
         boolean validData = true;
 
@@ -225,7 +231,6 @@ public class RegisterPatientController {
                 this.txtsurname.clear();
                 break;
             }
-           
         }
         
         char[] chars3 = allergies.toCharArray();
@@ -235,7 +240,6 @@ public class RegisterPatientController {
                 this.txtsurname.clear();
                 break;
             }
-           
         }
         
         char[] chars4 = diagnosis.toCharArray();
@@ -245,7 +249,6 @@ public class RegisterPatientController {
                 this.txtsurname.clear();
                 break;
             }
-           
         }
         
         char[] chars5 = medcard.toCharArray();
@@ -255,16 +258,13 @@ public class RegisterPatientController {
                 this.txtsurname.clear();
                 break;
             }
-           
         }
 
         if (this.txtname.getText().equals("")) {
             validData = false;
-           
         }
         if (this.txtsurname.getText().equals("")) {
             validData = false;
-           
         }
         if (this.txtdiagnosis.getText().equals("")){
             validData = false;
@@ -274,5 +274,4 @@ public class RegisterPatientController {
         }
         return validData;
     }
-    
 }
